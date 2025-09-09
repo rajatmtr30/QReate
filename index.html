@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for proper HTML5 document structure -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Qreate - Generate QR codes from URLs. Create downloadable QR codes that redirect to your links when scanned.">
+    <meta name="keywords" content="Qreate, QR code, generator, URL, barcode, scanner, Rajat Sharma">
+    <meta name="author" content="Rajat Sharma">
+    
+    <!-- Page title -->
+    <title>Qreate - QR Code Generator</title>
+    
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container for the entire application -->
+    <div class="container">
+        <!-- Header section with navigation and branding -->
+        <header class="main-header">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <h1>🔗 Qreate</h1>
+                    <span class="nav-subtitle">QR Code Generator</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#generator" class="nav-link active">Generator</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#about" class="nav-link">About</a>
+                </div>
+                <div class="nav-actions">
+                    <span class="developer-credit">by Rajat Sharma</span>
+                </div>
+            </nav>
+            
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2 class="hero-title">Create QR Codes in Seconds</h2>
+                    <p class="hero-description">Generate, customize, and download QR codes for URLs, text, and more. No signup required.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main generator section -->
+        <div class="generator-section" id="generator">
+            <!-- QR Code Type Selection -->
+            <div class="qr-type-selector">
+                <h3>Choose QR Code Type</h3>
+                <div class="type-tabs">
+                    <button class="type-tab active" data-type="url">
+                        <span class="tab-icon">🔗</span>
+                        <span class="tab-label">URL</span>
+                        <span class="tab-desc">Redirect to a website</span>
+                    </button>
+                    <button class="type-tab" data-type="text">
+                        <span class="tab-icon">📝</span>
+                        <span class="tab-label">Text</span>
+                        <span class="tab-desc">Display plain text</span>
+                    </button>
+                    <button class="type-tab" data-type="email">
+                        <span class="tab-icon">📧</span>
+                        <span class="tab-label">Email</span>
+                        <span class="tab-desc">Open email app</span>
+                    </button>
+                    <button class="type-tab" data-type="phone">
+                        <span class="tab-icon">📞</span>
+                        <span class="tab-label">Phone</span>
+                        <span class="tab-desc">Make a call</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input section -->
+            <div class="input-section">
+                <div class="input-card">
+                    <div class="input-header">
+                        <h4>Enter Your Content</h4>
+                        <p>Add the URL, text, or contact information you want to encode</p>
+                    </div>
+                    
+                    <div class="url-input-group">
+                        <div class="input-wrapper">
+                            <input type="url" id="urlInput" placeholder="Enter URL (e.g., https://example.com)" />
+                            <div class="input-icon">🔗</div>
+                        </div>
+                        <button id="generateBtn" class="generate-btn">
+                            <span class="btn-icon">⚡</span>
+                            Generate QR Code
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Customization options -->
+                <div class="customization-section">
+                    <div class="customization-header">
+                        <h4>Customize Your QR Code</h4>
+                        <p>Adjust size, format, and error correction</p>
+                    </div>
+                    
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="sizeSelect">Size</label>
+                            <select id="sizeSelect" class="modern-select">
+                                <option value="200">200px (Small)</option>
+                                <option value="300" selected>300px (Medium)</option>
+                                <option value="400">400px (Large)</option>
+                                <option value="500">500px (Extra Large)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="option-group">
+                            <label for="errorLevel">Error Correction</label>
+                            <select id="errorLevel" class="modern-select">
+                                <option value="L">Low (7%)</option>
+                                <option value="M" selected>Medium (15%)</option>
+                                <option value="Q">Quartile (25%)</option>
+                                <option value="H">High (30%)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="option-group">
+                            <label for="formatSelect">Format</label>
+                            <select id="formatSelect" class="modern-select">
+                                <option value="png" selected>PNG</option>
+                                <option value="jpg">JPG</option>
+                                <option value="svg">SVG</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result section -->
+            <div class="result-section">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h4>Your QR Code</h4>
+                        <p>Preview and download your generated QR code</p>
+                    </div>
+                    
+                    <!-- QR code display area -->
+                    <div class="qr-display">
+                        <div id="qrContainer" class="qr-container">
+                            <div class="placeholder">
+                                <div class="placeholder-icon">📱</div>
+                                <h5>Your QR Code Preview</h5>
+                                <p>Generate a QR code to see it here</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Action buttons -->
+                        <div id="qrActions" class="qr-actions" style="display: none;">
+                            <button id="downloadBtn" class="action-btn primary">
+                                <span class="btn-icon">📥</span>
+                                Download
+                            </button>
+                            <button id="copyBtn" class="action-btn secondary">
+                                <span class="btn-icon">📋</span>
+                                Copy
+                            </button>
+                            <button id="printBtn" class="action-btn secondary">
+                                <span class="btn-icon">🖨️</span>
+                                Print
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- QR code information -->
+                    <div class="qr-info">
+                        <div id="qrDetails" class="qr-details">
+                            <div class="info-placeholder">
+                                <p>QR code details will appear here after generation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Examples section -->
+        <div class="examples-section" id="features">
+            <div class="section-header">
+                <h3>Quick Examples</h3>
+                <p>Try these popular QR code types</p>
+            </div>
+            <div class="example-grid">
+                <button class="example-card" data-url="https://www.google.com">
+                    <div class="example-icon">🌐</div>
+                    <div class="example-content">
+                        <h5>Google</h5>
+                        <p>Website URL</p>
+                    </div>
+                </button>
+                <button class="example-card" data-url="https://www.github.com">
+                    <div class="example-icon">💻</div>
+                    <div class="example-content">
+                        <h5>GitHub</h5>
+                        <p>Developer Platform</p>
+                    </div>
+                </button>
+                <button class="example-card" data-url="https://www.youtube.com">
+                    <div class="example-icon">📺</div>
+                    <div class="example-content">
+                        <h5>YouTube</h5>
+                        <p>Video Platform</p>
+                    </div>
+                </button>
+                <button class="example-card" data-url="mailto:example@email.com">
+                    <div class="example-icon">📧</div>
+                    <div class="example-content">
+                        <h5>Email</h5>
+                        <p>Contact Info</p>
+                    </div>
+                </button>
+                <button class="example-card" data-url="tel:+1234567890">
+                    <div class="example-icon">📞</div>
+                    <div class="example-content">
+                        <h5>Phone</h5>
+                        <p>Call Number</p>
+                    </div>
+                </button>
+                <button class="example-card" data-url="Hello World! This is a QR code with text.">
+                    <div class="example-icon">📝</div>
+                    <div class="example-content">
+                        <h5>Text</h5>
+                        <p>Plain Text</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Information section -->
+        <div class="info-section" id="about">
+            <div class="section-header">
+                <h3>How Qreate Works</h3>
+                <p>Simple steps to create your QR codes</p>
+            </div>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h5>Choose Type</h5>
+                        <p>Select URL, text, email, or phone QR code type</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h5>Enter Content</h5>
+                        <p>Add your URL, text, or contact information</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h5>Customize</h5>
+                        <p>Adjust size, format, and error correction</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h5>Download</h5>
+                        <p>Save and share your QR code anywhere</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h5>URL QR Codes</h5>
+                    <p>Redirect users to websites, landing pages, or online content</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📧</div>
+                    <h5>Contact QR Codes</h5>
+                    <p>Share email addresses and phone numbers instantly</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h5>Text QR Codes</h5>
+                    <p>Display messages, instructions, or any plain text</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h5>Instant Generation</h5>
+                    <p>Create QR codes in seconds with no signup required</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>🔗 Qreate</h3>
+                    <p>QR Code Generator</p>
+                </div>
+                <div class="footer-info">
+                    <p>Developed with ❤️ by <strong>Rajat Sharma</strong></p>
+                    <p class="footer-tagline">Create, Share, Connect</p>
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2024 Qreate. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- External JavaScript Libraries -->
+    <!-- QR Code generation library from Cloudflare CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    
+    <!-- Main application JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
