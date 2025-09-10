@@ -3,6 +3,7 @@
 **Qreate** (QR + Create) is a modern, responsive HTML5 JavaScript application that generates QR codes with real-time customization. Features multiple QR code types, live preview, and instant regeneration when customization options change.
 
 **Developed by:** Rajat Sharma
+
 **Hosted Url:** https://rajatmtr30.github.io/QReate
 
 ## 🆕 What's New in v2.0
@@ -259,4 +260,5 @@ If you encounter any issues or have questions:
 - 🎨 **Modern UI**: Professional design inspired by leading QR generators
 - 📱 **Better Mobile**: Optimized for all devices
 - 🚀 **Enhanced UX**: Smoother interactions and faster generation
+
 
